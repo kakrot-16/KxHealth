@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.Department1Mapper">
+
+    <select id="getDe1List" resultType="department1" parameterType="department1">
+        SELECT d1_id,d1_name,d1_hospital_id,d1_tel
+        FROM department1
+        <where>
+            <if test="d1_id!=0">
+                d1_id=#{d1_id}
+            </if>
+            <if test="d1_name!=null and d1_name!=''">
+                d1_name=#{d1_name}
+            </if>
+            <if test="d1_hospital_id!=0">
+                d1_hospital_id=#{d1_hospital_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addDe1" parameterType="department1">
+        INSERT INTO department1 VALUES (0,#{d1_name},#{d1_hospital_id},#{d1_tel});
+    </insert>
+
+    <delete id="deletaDe1" parameterType="Int">
+        DELETE FROM department1 WHERE d1_id=#{d1_id};
+    </delete>
+
+    <update id="updateDe1" parameterType="department1">
+        UPDATE department1
+        <set>
+            <if test="d1_name!=null and d1_name!=''">
+                d1_name=#{d1_name},
+            </if>
+            <if test="d1_hospital_id!=0">
+                d1_hospital_id=#{d1_hospital_id},
+            </if>
+            <if test="d1_tel!=null and d1_tel!=''">
+                d1_tel=#{d1_tel}
+            </if>
+        </set>
+        WHERE d1_id=#{d1_id}
+    </update>
+
+    <select id="getDe1ListById" resultType="Department1">
+        select d1_id,d1_name
+        from department1
+        where d1_hospital_id = #{id}
+    </select>
+
+    <select id="getSingle" resultType="Department1">
+        select  d1_tel
+        from Department1
+        where d1_hospital_id = #{h_hospital}
+    </select>
+
+    <select id="getTel" resultType="Department1">
+        select d1_tel,d1_name
+        from department1
+        where d1_id = #{d_department1}
+        and d1_hospital_id = (select d_hospital from doctor where d_id = #{d_id})
+    </select>
+</mapper>

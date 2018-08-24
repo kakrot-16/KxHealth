@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.AppointmentMapper">
+    <select id="getDocList" resultType="Doctor" >
+        select *
+        from doctor
+        <where>
+            <if test="h_id != null and h_id != ''">
+                d_hospital = #{h_id}
+            </if>
+            <if test="d1_id != null and d1_id != ''">
+                and d_department1 = #{d1_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addAppointment" parameterType="Appointment">
+        insert  into
+        appointment (ap_user_id,ap_doc_id,ap_time,ap_status)values (#{ap_user_id},#{ap_doc_id},now(),1)
+    </insert>
+</mapper>

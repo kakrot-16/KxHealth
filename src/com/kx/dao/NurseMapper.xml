@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.NurseMapper">
+ <resultMap type="Nurse" id="nurseList">
+ 	<id property="n_id" column="n_id"/>
+ 	<result property="n_name" column="n_name"/>
+ 	<result property="lastTime" column="lastTime"/>
+ 	<result property="isFree" column="n_phone"/>
+ 	<result property="n_phone" column="n_phone"/>
+ 	<result property="orderid" column="orderid"/>
+ </resultMap>
+	<select id="getAll" resultMap="nurseList">
+		SELECT * from nurse where 1=1
+		<if test="n_id!=null">
+			and n_id=#{n_id}
+		</if>
+		<if test="isFree==0">
+			and isFree=0
+		</if>
+		<if test="isFree==1">
+			and idFree=1
+		</if>
+		<if test="n_phone!=null">
+			and n_phone=#{n_phone}
+		</if>
+		<if test="orderid!=0">
+			and orderid=#{orderid}
+		</if>
+	</select>
+	<insert id="saveNurse" parameterType="Nurse">
+		insert into nurse(n_id,n_name,lastTime,isFree,n_phone,orderid) values(#{n_id},#{n_name},now(),#{n_phone},#{orderid})
+	</insert>
+	<delete id="deleteNurse">
+		delete from nurse where n_id=#{n_id}
+	</delete>
+	<update id="modifyNurse" parameterType="Nurse">
+		update nurse
+		<set>
+			<if test="n_name!=null and n_name!=''">
+				n_name=#{n_name},
+			</if>
+			<if test="lastTime!='' and lastTime!=null">
+				
+			</if>
+		</set>
+	</update>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.HospitalMapper">
+ <!-- 自定义返回结果集 -->
+	<resultMap type="Hospital" id="hospitalList">
+ 	<id property="h_id" column="h_id"/>
+ 	<result property="h_class" column="h_class"/>
+ 	<result property="h_grade" column="h_grade"/>
+ 	</resultMap>
+ 	<select id="getAll" resultMap="hospitalList">
+		SELECT * from hospital where 1=1
+		<if test="h_id!=0">
+				and h_id=#{h_id}
+			</if>
+			<if test="h_name!=null">
+				and h_name=#{h_name}
+			</if>
+			<if test="h_class!=null">
+				and h_class=#{h_class}
+			</if>
+			<if test="h_grade!=0">
+				and h_grade=#{h_grade}
+			</if>
+			<if test="h_address!=null">
+				and h_address=#{h_address}
+			</if>
+			<if test="h_url!=null">
+				and h_url=#{h_url}
+			</if>
+	</select>
+	<insert id="saveHospital" parameterType="Hospital">
+		insert into hospital(h_id,h_name,h_class,h_grade,h_address,h_url) 
+		values(#{h_id},#{h_name},#{h_class},#{h_grade},#{h_address},#{h_url})
+	</insert>
+	<delete id="deleteHospital">
+		delete from hospital where h_id=#{h_id}
+	</delete>
+	<update id="modifyHospital" parameterType="Hospital">
+		update hospital
+		<set>
+			<if test="h_id!=0">
+				h_id=#{h_id},
+			</if>
+			<if test="h_name!=null">
+				h_name=#{h_name},
+			</if>
+			<if test="h_class!=null">
+				h_class=#{h_class},
+			</if>
+			<if test="h_grade!=0">
+				h_grade=#{h_grade},
+			</if>
+			<if test="h_address!=null">
+				h_address=#{h_address},
+			</if>
+			<if test="h_url!=null">
+				h_url=#{h_url},
+			</if>
+		</set>
+		WHERE h_id=#{h_id}
+	</update>
+
+	<select id="getSingle" resultType="Hospital">
+		select *
+		from Hospital
+		where h_id = (select d_hospital
+		from doctor
+		where d_id = #{d_id})
+	</select>
+</mapper>

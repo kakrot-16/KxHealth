@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.DoctorMapper">
+
+
+
+    <insert id="insertDoc" parameterType="doctor">
+        INSERT INTO doctor
+         VALUES (0,#{d_code},#{d_name},#{d_pass},#{d_gender},#{d_hospital}
+         ,#{d_department1},#{d_department2},#{d_work_age},#{d_type},#{d_intro}
+         ,#{d_picture},#{d_price},#{d_consult},#{d_grade});
+    </insert>
+
+    <delete id="deleteDoc" parameterType="int">
+        DELETE FROM doctor WHERE d_id=#{d_id};
+    </delete>
+
+    <update id="updateDoc" parameterType="doctor">
+        UPDATE doctor
+        <set>
+            <if test="d_code!=null">
+                d_code=#{d_code},
+            </if>
+            <if test="d_name!=null">
+                d_name=#{d_name},
+            </if>
+            <if test="d_pass!=null">
+                d_pass=#{d_pass},
+            </if>
+            <if test="d_gender!=0">
+                d_gender=#{d_gender},
+            </if>
+            <if test="d_hospital!=0">
+                d_hospital=#{d_hospital},
+            </if>
+            <if test="d_department1!=0">
+                d_department1=#{d_department1},
+            </if>
+            <if test="d_department2!=0">
+                d_department2=#{d_department2},
+            </if>
+            <if test="d_work_age!=0">
+                d_work_age=#{d_work_age},
+            </if>
+            <if test="d_type!=null">
+                d_type=#{d_type},
+            </if>
+            <if test="d_intro!=null">
+                d_intro=#{d_intro},
+            </if>
+            <if test="d_picture!=null">
+                d_picture=#{d_picture},
+            </if>
+            <if test="d_price!=0">
+                d_price=#{d_price},
+            </if>
+            <if test="d_consult!=0">
+                d_consult=#{d_consult},
+            </if>
+            <if test="d_grade!=0">
+                d_grade=#{d_grade},
+            </if>
+        </set>
+        WHERE d_id=#{d_id}
+    </update>
+
+    <select id="getDoc" parameterType="doctor" resultType="doctor">
+        SELECT d_id,d_code,d_name,d_pass,d_gender,d_hospital,d_department1,d_department2,d_work_age,d_type,d_intro,d_picture,d_price,d_consult
+        FROM doctor
+        WHERE 1=1
+        <if test="d_id!=0">
+            AND d_id=#{d_id}
+        </if>
+        <if test="d_name!=null">
+            AND d_name=#{d_name}
+        </if>
+        <if test="d_gender!=0">
+            AND d_gender=#{d_gender}
+        </if>
+        <if test="d_hospital!=0">
+            AND d_hospital=#{d_hospital}
+        </if>
+        <if test="d_department2!=0">
+            AND d_department2=#{d_department2}
+        </if>
+        <if test="d_work_age!=0">
+            AND d_work_age >= #{d_work_age}
+        </if>
+        <if test="d_type!=null">
+            AND d_type=#{d_type}
+        </if>
+        <if test="d_consult!=0">
+            AND d_consult=#{d_consult}
+        </if>
+    </select>
+
+    <select id="getDocByOption" resultType="doctor" >
+        select *
+        from doctor
+        where d_hospital =#{d_hospital}
+        and d_department1 = #{d_department1}
+        <if test="d_type != null and d_type != ''">
+            and d_type = #{d_type}
+        </if>
+    </select>
+
+</mapper>
