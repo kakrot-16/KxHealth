@@ -1,6 +1,7 @@
 package com.kx.service;
 
 import com.kx.dao.OrdersMapper;
+import com.kx.pojo.Doctor;
 import com.kx.pojo.Orders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +38,10 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> docQueryOrder(String d_id, String u_name, String or_time1, String or_time2) {
         return ordersMapper.docQueryOrder(d_id,u_name,or_time1,or_time2);
+    }
+
+    @Override
+    public List<String> getNum(Doctor doctor) {
+        return ordersMapper.getNum(doctor);
     }
 }

@@ -2,6 +2,7 @@ package com.kx.controller;
 
 import com.kx.dao.Department1Mapper;
 import com.kx.dao.HospitalMapper;
+import com.kx.dao.OrdersMapper;
 import com.kx.pojo.Department1;
 import com.kx.pojo.Doctor;
 import com.kx.pojo.DoctorWork;
@@ -30,6 +31,8 @@ public class DoctorWorkController {
     private HospitalService hospitalService;
     @Resource
     private Department1Mapper department1Mapper;
+    @Resource
+    private OrdersMapper ordersMapper;
 
     //医生Id 医生所在一级科室id 获取医院信息  获得医生的排班情况
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
@@ -39,6 +42,11 @@ public class DoctorWorkController {
         DoctorWork doctorWork = doctorWorkService.getSingle(doctor);
         System.out.println(doctorWork.getW_workDate() + "-------------");
         Department1 department1 = department1Mapper.getTel(doctor);
+        List<String> numList = ordersMapper.getNum(doctor);
+        for (String integer : numList) {
+            System.out.println(integer+"~~~~~~~~~~~~++++>>>>>>>>>>");
+        }
+        model.addAttribute("numList", numList);
         model.addAttribute("department1", department1);//医院电话
         model.addAttribute("hospital", hospital);//医院信息
         model.addAttribute("doctorWork", doctorWork);//医生排版信息

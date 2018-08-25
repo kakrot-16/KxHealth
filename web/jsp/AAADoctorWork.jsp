@@ -93,18 +93,12 @@
                     </dd>
                 </dl>
             </div>
-            <div class="ksorder_c_right">
-                <h4>相关医院推荐</h4>
-                <ul>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
 <div id="ksorder_time">
     <div class="ksorder_time_title">
         <!-- <a href="#" class="ksorder_time_ckb" >查看科室月排班</a> -->
-
         <p class="ksorder_t_p">科室排班表</p>
         <a href="/hp/appoint/1/1.htm" class="callback_ks">返回科室列表</a>
     </div>
@@ -150,27 +144,30 @@
                                 <p class="date"></p>
                             </th>
                         </tr>
+                        <script>
+
+                        </script>
                         <tr>
                             <td>
-                                有号<input type="hidden" name="col_0" value="0_1_2018-08-24">
+                                有号<input type="hidden" name="col_0" >
                             </td>
                             <td>
-                                有号<input type="hidden" name="col_1" value="1_1_2018-08-25">
+                                有号<input type="hidden" name="col_1" >
                             </td>
                             <td>
-                                有号<input type="hidden" name="col_2" value="2_1_2018-08-26">
+                                有号<input type="hidden" name="col_2" >
                             </td>
                             <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_3" value="3_1_2018-08-27">
+                                约满<input type="hidden" name="col_3" >
                             </td>
                             <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_4" value="4_1_2018-08-28">
+                                约满<input type="hidden" name="col_4" >
                             </td>
                             <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_5" value="5_1_2018-08-29">
+                                约满<input type="hidden" name="col_5" >
                             </td>
                             <td>
-                                有号<input type="hidden" name="col_6" value="6_1_2018-08-30">
+                                有号<input type="hidden" name="col_6" >
                             </td>
                         </tr>
                     </table>
