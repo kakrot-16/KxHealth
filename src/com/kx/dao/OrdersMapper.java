@@ -32,6 +32,4 @@ public interface OrdersMapper {
     List<Orders> userQueryOrder(String u_id);
     List<Orders> docQueryOrder(@Param("d_id") String d_id, @Param("u_name") String u_name, @Param("or_time1") String or_time1, @Param("or_time2") String or_time2);
 
-    //查看排班状态以及剩余号码数量
-    List<String> getNum(Doctor doctor);
 }

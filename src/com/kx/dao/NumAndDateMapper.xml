@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kx.dao.NumAndDateMapper">
+    <select id="getAll" resultType="NumAndDate">
+        select count(*) count
+        from orders
+        where or_doc_id = #{d_id}
+        and DATE(or_data_time) >= DATE(NOW()) - 7
+        GROUP BY DATE(or_data_time)
+    </select>
+</mapper>

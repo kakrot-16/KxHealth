@@ -40,8 +40,4 @@ public class OrdersServiceImpl implements OrdersService {
         return ordersMapper.docQueryOrder(d_id,u_name,or_time1,or_time2);
     }
 
-    @Override
-    public List<String> getNum(Doctor doctor) {
-        return ordersMapper.getNum(doctor);
-    }
 }

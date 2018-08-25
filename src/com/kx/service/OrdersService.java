@@ -30,6 +30,4 @@ public interface OrdersService {
      */
     List<Orders> userQueryOrder(String u_id);
     List<Orders> docQueryOrder(String d_id, String u_name, String or_time1, String or_time2);
-    //查看排班状态以及剩余号码数量
-    List<String> getNum(Doctor doctor);
 }

@@ -3,12 +3,11 @@ package com.kx.controller;
 import com.kx.dao.Department1Mapper;
 import com.kx.dao.HospitalMapper;
 import com.kx.dao.OrdersMapper;
-import com.kx.pojo.Department1;
-import com.kx.pojo.Doctor;
-import com.kx.pojo.DoctorWork;
-import com.kx.pojo.Hospital;
+import com.kx.pojo.*;
+import com.kx.service.Department1Service;
 import com.kx.service.DoctorWorkService;
 import com.kx.service.HospitalService;
+import com.kx.service.NumAndDateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +29,9 @@ public class DoctorWorkController {
     @Resource
     private HospitalService hospitalService;
     @Resource
-    private Department1Mapper department1Mapper;
+    private Department1Service department1Service;
     @Resource
-    private OrdersMapper ordersMapper;
+    private NumAndDateService numAndDateService;
 
     //医生Id 医生所在一级科室id 获取医院信息  获得医生的排班情况
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
@@ -41,12 +40,12 @@ public class DoctorWorkController {
         Hospital hospital = hospitalService.getSingle(doctor);
         DoctorWork doctorWork = doctorWorkService.getSingle(doctor);
         System.out.println(doctorWork.getW_workDate() + "-------------");
-        Department1 department1 = department1Mapper.getTel(doctor);
-        List<String> numList = ordersMapper.getNum(doctor);
-        for (String integer : numList) {
-            System.out.println(integer+"~~~~~~~~~~~~++++>>>>>>>>>>");
+        Department1 department1 = department1Service.getTel(doctor);
+        List<NumAndDate> list = numAndDateService.getAll(doctor);
+        for (NumAndDate numAndDate : list) {
+            System.out.println(numAndDate.getNum()+"》》》》》》》》》》》》");
         }
-        model.addAttribute("numList", numList);
+        model.addAttribute("list", list);
         model.addAttribute("department1", department1);//医院电话
         model.addAttribute("hospital", hospital);//医院信息
         model.addAttribute("doctorWork", doctorWork);//医生排版信息

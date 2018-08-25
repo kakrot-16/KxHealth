@@ -13,6 +13,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>康馨尚医预约挂号平台</title>
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <script type="text/javascript" src="../static/js/jquery-1.12.4.js"></script>
         <%
         Hospital hospital = (Hospital) request.getAttribute("hospital");
@@ -23,7 +25,6 @@
         String d_department1 = request.getParameter("d_department1");
         System.out.println("jsp中--------------"+d_id+"   "+d_department1);
         String path = request.getContextPath();
-        System.out.println("/doctorWork/getInfo?d_id="+d_id+"&d_department1="+d_department1);
         request.getRequestDispatcher(path+"/doctorWork/getInfo?d_id="+d_id+"&d_department1="+d_department1).forward(request,response);
         }
         %>
@@ -62,7 +63,7 @@
             <p class="ksorder_box_top_p">
                 <strong><strong style="font-size: 20px;color: #00b3ec">${hospital.h_name}</strong>&nbsp;&nbsp;—&nbsp;&nbsp;<strong
                         style="color: #0caf33">${department1.d1_name}</strong></strong>
-                <input type="hidden" id="dId" value="200003979"/>
+                <p type="hidden" id="dId" value="200003979"/>
             </p>
         </div>
         <div class="ksorder_box_content">
@@ -144,32 +145,35 @@
                                 <p class="date"></p>
                             </th>
                         </tr>
+                        <tr>
+                            <td>
+                                <span>${list[0]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[1]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[2]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[3]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[4]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[5]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <td>
+                                <span>${list[6]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                            </td>
+                            <%--<td class="ksorder_ym">--%>
+                                <%--<span></span>约满--%>
+                            <%--</td>--%>
+                        </tr>
                         <script>
 
                         </script>
-                        <tr>
-                            <td>
-                                有号<input type="hidden" name="col_0" >
-                            </td>
-                            <td>
-                                有号<input type="hidden" name="col_1" >
-                            </td>
-                            <td>
-                                有号<input type="hidden" name="col_2" >
-                            </td>
-                            <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_3" >
-                            </td>
-                            <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_4" >
-                            </td>
-                            <td class="ksorder_ym">
-                                约满<input type="hidden" name="col_5" >
-                            </td>
-                            <td>
-                                有号<input type="hidden" name="col_6" >
-                            </td>
-                        </tr>
                     </table>
                 </div>
             </div>

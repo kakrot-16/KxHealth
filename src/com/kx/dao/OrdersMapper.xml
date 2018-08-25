@@ -44,11 +44,4 @@
         where or_buyer_id = #{u_id}
     </select>
 
-    <select id="getNum" resultType="String">
-        select count(*) count
-        from orders
-        where or_doc_id = #{d_id}
-        and DATE(or_data_time) >= DATE(NOW()) - 7
-        GROUP BY DATE(or_data_time)
-    </select>
 </mapper>
