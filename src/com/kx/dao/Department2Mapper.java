@@ -18,5 +18,7 @@ public interface Department2Mapper {
     int updateDepartment2(Department2 department2);
     //查找二级科室的方法(已测)
     List<Department2> getDepartmentList(Department2 department2);
+    //寻找二级科室的方法(已测)
+    List<Department2> getDe1ListById(String id);//张帅
 
 }
