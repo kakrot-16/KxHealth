@@ -5,22 +5,22 @@ package com.kx.pojo;
  * @version 1.0
  */
 public class NumAndDate {
-    private int num;//已挂号数量
-    private String date;//日期
+    private int count;//已挂号数量
+    private String or_data_time;//日期
 
-    public int getNum() {
-        return num;
+    public int getCount() {
+        return count;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public String getDate() {
-        return date;
+    public String getOr_data_time() {
+        return or_data_time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setOr_data_time(String or_data_time) {
+        this.or_data_time = or_data_time;
     }
 }

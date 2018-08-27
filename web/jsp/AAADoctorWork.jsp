@@ -100,7 +100,7 @@
 <div id="ksorder_time">
     <div class="ksorder_time_title">
         <!-- <a href="#" class="ksorder_time_ckb" >查看科室月排班</a> -->
-        <p class="ksorder_t_p">科室排班表</p>
+        <p class="ksorder_t_p">医生排班表</p>
         <a href="/hp/appoint/1/1.htm" class="callback_ks">返回科室列表</a>
     </div>
     <div class="ksorder_time_center">
@@ -147,33 +147,62 @@
                         </tr>
                         <tr>
                             <td>
-                                <span>${list[0]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[0] eq list[0].or_data_time}">
+                                    <span>${10-list[0].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[0] ne list[0].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[1]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[1] eq list[1].or_data_time}">
+                                    <span>${10-list[1].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[1] ne list[1].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[2]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[2] eq list[2].or_data_time}">
+                                    <span>${10-list[2].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[2] ne list[2].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[3]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[3] eq list[3].or_data_time}">
+                                    <span>${10-list[3].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[3] ne list[3].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[4]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[4] eq list[4].or_data_time}">
+                                    <span>${10-list[4].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[4] ne list[4].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[5]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[5] eq list[5].or_data_time}">
+                                    <span>${10-list[5].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[5] ne list[5].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
                             <td>
-                                <span>${list[6]>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                <c:if test="${timeList[6] eq list[6].or_data_time}">
+                                    <span>${10-list[6].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                </c:if>
+                                <c:if test="${timeList[6] ne list[6].or_data_time}">
+                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                </c:if>
                             </td>
-                            <%--<td class="ksorder_ym">--%>
-                                <%--<span></span>约满--%>
-                            <%--</td>--%>
                         </tr>
-                        <script>
-
-                        </script>
                     </table>
                 </div>
             </div>

@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,9 +46,16 @@ public class DoctorWorkController {
         System.out.println(doctorWork.getW_workDate() + "-------------");
         Department1 department1 = department1Service.getTel(doctor);
         List<NumAndDate> list = numAndDateService.getAll(doctor);
-        for (NumAndDate numAndDate : list) {
-            System.out.println(numAndDate.getNum()+"》》》》》》》》》》》》");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        String[] timeList = new String[7];
+        for (int i = 0; i < 7; i++) {
+            Date monday = c.getTime();
+            timeList[i] = sdf.format(monday);
+            c.add(Calendar.DATE, +1);
         }
+        model.addAttribute("timeList", timeList);
         model.addAttribute("list", list);
         model.addAttribute("department1", department1);//医院电话
         model.addAttribute("hospital", hospital);//医院信息
