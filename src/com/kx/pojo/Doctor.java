@@ -22,6 +22,15 @@ public class Doctor {
 	private String d_picture;// 医生照片
 	private double d_price;// 该医生挂号费
 	private double d_consult;// 咨询费
+	private int d_num;//医生放号量    张帅
+
+	public int getD_num() {
+		return d_num;
+	}
+
+	public void setD_num(int d_num) {
+		this.d_num = d_num;
+	}
 
 	public int getD_id() {
 		return d_id;

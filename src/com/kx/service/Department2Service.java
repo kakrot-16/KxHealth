@@ -13,4 +13,6 @@ public interface Department2Service {
     int updateDepartment2(Department2 department2);
     //查找二级科室的方法
     List<Department2> getDepartmentList(Department2 department2);
+    //查找二级科室  张帅
+    List<Department2> getDe1ListById(String id);
 }

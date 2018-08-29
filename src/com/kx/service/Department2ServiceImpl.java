@@ -32,4 +32,9 @@ public class Department2ServiceImpl implements Department2Service{
     public List<Department2> getDepartmentList(Department2 department2) {
         return department2Mapper.getDepartmentList(department2);
     }
+
+    @Override
+    public List<Department2> getDe1ListById(String id) {
+        return department2Mapper.getDe1ListById(id);
+    }
 }

@@ -2,6 +2,7 @@ package com.kx.service;
 
 import com.kx.pojo.Appointment;
 import com.kx.pojo.Doctor;
+import com.kx.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,4 +17,13 @@ public interface AppointmentService {
 
     //添加预约记录
     int addAppointment(String ap_user_id, String ap_doc_id);
+
+        ////查询预约未完成的记录   可以根据id 查询个人(用户自己操作)
+        List<Appointment> getNo(String ap_user_id);
+
+        //定时检查预约表是否有过期预约
+        int updateStatus(String ap_id);
+
+        //定时到数据库获取预约表 并发现有医生排班向预约人发送短信通知
+        List<User> getYes();
 }

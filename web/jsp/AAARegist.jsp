@@ -16,19 +16,26 @@
         var se1 = null;
         var se2 = null;
         var se3 = null;
+        var se4 = null;
         $("#se1").change(function () {
             $("#se2").html("");
             $("#se3").html("");
+            $("#se4").html("");
             ajax2();
 
         });
         $("#se2").change(function () {
             $("#se3").html("");
+            $("#se4").html("");
             ajax3();
+        });
+        $("#se3").change(function () {
+            $("#se4").html("");
+            ajax4();
         });
         //合集
         function ajax() {
-            //一级
+            //一级医院
             $.ajax({
                 url:"<%=request.getContextPath()%>/hospital/getAll" ,
                 dataType:"text",
@@ -43,7 +50,7 @@
                     $("#se1").html(str);
                     se1 = $("#se1").val();
                     if (se1 != null || se1 != '') {
-                        //二级
+                        //二级科室
                         $.ajax({
                             url: "<%=request.getContextPath()%>/department1/getAll",
                             data: {"id": se1},
@@ -58,19 +65,37 @@
                                 $("#se2").html(str);
                                 se2 = $("#se2").val();
                                 if (se2 != null || se2 != '') {
-                                    //三级
+                                    //三级门诊
                                     $.ajax({
-                                        url: "<%=request.getContextPath()%>/doctor/getDocByOption",
-                                        data: {"d_hospital": se1, "d_department1": se2},
+                                        url: "<%=request.getContextPath()%>/department2/getAll",
+                                        data: {"id": se2},
                                         type: "get",
                                         dataType: "json",
                                         success: function (data) {
                                             $("#se3").html("");
                                             var str = "";
                                             for (var p in data) {//遍历json数组时，这么写p为索引，0,1
-                                                str += "<option value=" + data[p].d_id + ">" + data[p].d_name +"--"+data[p].d_type+"--"+ "</option><span>详情</span>";
+                                                str += "<option value=" + data[p].d2_id + ">" + data[p].d2_name + "</option>";
                                             }
                                             $("#se3").html(str);
+                                            se3 = $("#se3").val();
+                                            if (se3 != null || se3 != '') {
+                                                //四级医生
+                                                $.ajax({
+                                                    url: "<%=request.getContextPath()%>/doctor/getDocByOption",
+                                                    data: {"d_hospital": se1, "d_department1": se2,"d_department2":se3},
+                                                    type: "get",
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        $("#se4").html("");
+                                                        var str = "";
+                                                        for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                                                            str += "<option value=" + data[p].d_id + ">" + data[p].d_name +"--"+data[p].d_type+"--"+ "</option>";
+                                                        }
+                                                        $("#se4").html(str);
+                                                    }
+                                                });
+                                            }
                                         }
                                     });
                                 }
@@ -81,10 +106,10 @@
             });
 
         }
-        var ajax2 = function () {
-            //二级选择
+        function ajax2(){
             se1 = $("#se1").val();
-            if(se1 != null || se1 != '') {
+            if (se1 != null || se1 != '') {
+                //二级科室
                 $.ajax({
                     url: "<%=request.getContextPath()%>/department1/getAll",
                     data: {"id": se1},
@@ -97,21 +122,39 @@
                             str += "<option value=" + data[p].d1_id + ">" + data[p].d1_name + "</option>";
                         }
                         $("#se2").html(str);
-                        //三级选择
                         se2 = $("#se2").val();
-                        if(se2 != null || se2 != ''){
+                        if (se2 != null || se2 != '') {
+                            //三级门诊
                             $.ajax({
-                                url:"<%=request.getContextPath()%>/doctor/getDocByOption" ,
-                                data:{"d_hospital":se1,"d_department1":se2},
-                                type:"get",
-                                dataType:"json",
-                                success:function (data) {
+                                url: "<%=request.getContextPath()%>/department2/getAll",
+                                data: {"id": se2},
+                                type: "get",
+                                dataType: "json",
+                                success: function (data) {
                                     $("#se3").html("");
                                     var str = "";
-                                    for(var p in data){//遍历json数组时，这么写p为索引，0,1
-                                        str += "<option value="+data[p].d_id+">"+ data[p].d_name +"--"+data[p].d_type+"--"+ "</option><span>详情</span>";
+                                    for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                                        str += "<option value=" + data[p].d2_id + ">" + data[p].d2_name + "</option>";
                                     }
                                     $("#se3").html(str);
+                                    se3 = $("#se3").val();
+                                    if (se3 != null || se3 != '') {
+                                        //四级医生
+                                        $.ajax({
+                                            url: "<%=request.getContextPath()%>/doctor/getDocByOption",
+                                            data: {"d_hospital": se1, "d_department1": se2,"d_department2":se3},
+                                            type: "get",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $("#se4").html("");
+                                                var str = "";
+                                                for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                                                    str += "<option value=" + data[p].d_id + ">" + data[p].d_name +"--"+data[p].d_type+"--"+ "</option>";
+                                                }
+                                                $("#se4").html(str);
+                                            }
+                                        });
+                                    }
                                 }
                             });
                         }
@@ -119,65 +162,112 @@
                 });
             }
         }
-        var ajax3 = function () {
-            //三级选择
+        function ajax3() {
             se2 = $("#se2").val();
-            if(se2 != null || se2 != ''){
+            if (se2 != null || se2 != '') {
+                //三级门诊
                 $.ajax({
-                    url:"<%=request.getContextPath()%>/doctor/getDocByOption" ,
-                    data:{"d_hospital":se1,"d_department1":se2},
-                    type:"get",
-                    dataType:"json",
-                    success:function (data) {
+                    url: "<%=request.getContextPath()%>/department2/getAll",
+                    data: {"id": se2},
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
                         $("#se3").html("");
                         var str = "";
-                        for(var p in data){//遍历json数组时，这么写p为索引，0,1
-                            str += "<option value="+data[p].d_id+">"+ data[p].d_name +"--"+data[p].d_type+"--"+ "</option><span>详情</span>";
+                        for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                            str += "<option value=" + data[p].d2_id + ">" + data[p].d2_name + "</option>";
                         }
                         $("#se3").html(str);
+                        se3 = $("#se3").val();
+                        if (se3 != null || se3 != '') {
+                            //四级医生
+                            $.ajax({
+                                url: "<%=request.getContextPath()%>/doctor/getDocByOption",
+                                data: {"d_hospital": se1, "d_department1": se2, "d_department2": se3},
+                                type: "get",
+                                dataType: "json",
+                                success: function (data) {
+                                    $("#se4").html("");
+                                    var str = "";
+                                    for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                                        str += "<option value=" + data[p].d_id + ">" + data[p].d_name + "--" + data[p].d_type + "--" + "</option>";
+                                    }
+                                    $("#se4").html(str);
+                                }
+                            });
+                        }
                     }
                 });
             }
         }
+        function ajax4(){
+            se3 = $("#se3").val();
+            if (se3 != null || se3 != '') {
+                //四级医生
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/doctor/getDocByOption",
+                    data: {"d_hospital": se1, "d_department1": se2, "d_department2": se3},
+                    type: "get",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#se4").html("");
+                        var str = "";
+                        for (var p in data) {//遍历json数组时，这么写p为索引，0,1
+                            str += "<option value=" + data[p].d_id + ">" + data[p].d_name + "--" + data[p].d_type + "--" + "</option>";
+                        }
+                        $("#se4").html(str);
+                    }
+                });
+            }
+        }
+
+        //时间change 事件
+        $("#time").change(function () {
+           swal($(this).val() > new Date().toLocaleDateString())
+            console.log($(this).val())
+            console.log(new Date())
+            console.log($(this).val() > new Date())
+        });
 
         //点击提交
         $("#btn").click(function () {
             se1 = $("#se1").val();
             se2 = $("#se2").val();
             se3 = $("#se3").val();
+            se4 = $("#se4").val();
             var time = $("#time").val();
-            if((se1==null||se1=='' )|| (se2==null||se2=='') || (se3 == null || se3 == '') ||
-                (time==null || time == '')){
-                swal("请选择所有选项")
-            }else{
-                <%--var ap_user_id = <%=user.getU_id()%>;//用户id--%>
-                var ap_user_id = 1;//用户id
-                var ap_doc_id = 1;//医生id
-                $.ajax({
-                    url:"<%=request.getContextPath()%>/appointment/add",
-                    // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
-                    data:"ap_user_id="+ap_user_id+"&ap_doc_id="+ap_doc_id,
-                    type:"post",
-                    dataType:"text",
-                    success:function (data) {
-                        if(data > 0){
-                            swal({
-                                title: "预约成功,医生有号时我们会短信通知您",
-                                text: "要跳转回首页吗？",
-                                type: "success",
-                                showCancelButton: true,
-                                closeOnConfirm: false,
-                                confirmButtonText: "是的，我要回首页",
-                                confirmButtonColor: "#1fd783"
-                            }, function() {
-                                window.location.replace("../index.jsp");
-                            });
-                        }else{
-                            swal("预约失败")
+                if ((se1 == null || se1 == '') || (se2 == null || se2 == '') || (se3 == null || se3 == '') ||
+                    (time == null || time == '') || (se4 == null || se4 == '')) {
+                    swal("请选择所有选项")
+                } else {
+                    <%--var ap_user_id = <%=user.getU_id()%>;//用户id--%>
+                    var ap_user_id = 1;//用户id
+                    var ap_doc_id = 1;//医生id
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/appointment/add",
+                        // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
+                        data: "ap_user_id=" + ap_user_id + "&ap_doc_id=" + ap_doc_id,
+                        type: "post",
+                        dataType: "text",
+                        success: function (data) {
+                            if (data > 0) {
+                                swal({
+                                    title: "预约成功,医生有号时我们会短信通知您",
+                                    text: "要跳转回首页吗？",
+                                    type: "success",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    confirmButtonText: "是的，我要回首页",
+                                    confirmButtonColor: "#1fd783"
+                                }, function () {
+                                    window.location.replace("../index.jsp");
+                                });
+                            } else {
+                                swal("预约失败")
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
         });
     });
 </script>
@@ -245,8 +335,14 @@
 						</select>
 					</div>
 					<div class="row g-clear">
+						<label>门诊</label>
+						<select class="city js-city disabled"   id="se3">
+
+						</select>
+					</div>
+					<div class="row g-clear">
 						<label>医生：</label>
-						<select class="js-hospital disabled"  id="se3">
+						<select class="js-hospital disabled"  id="se4">
 
 						</select>
 					</div>

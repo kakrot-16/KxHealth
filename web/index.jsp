@@ -611,7 +611,7 @@
 <a href="keshi.html" title="所在医院" target="_blank" class="office">所在医院医院</a>
 <a href="ys.html" title="姓名" target="_blank" class="post">主任医师  研究生导师</a>
 <a href="ys.html" title="姓名" target="_blank" class="btn more">详细</a>
-<a href="<%=request.getContextPath()%>/jsp/AAADoctorWork.jsp?d_id=1&d_department1=1" target="_blank" class="btn date">预约</a></li>
+<a href="<%=request.getContextPath()%>/doctorWork/getInfo?d_id=1&d_department1=1" target="_blank" class="btn date">预约</a></li>
 
 <li><a href="ys.html" title="医生姓名" target="_blank" class="img"><img alt="姓名" title="姓名" src="static/pic/201603221527067.png" width="120" height="162" /></a>
   <a href="ys.html" title="医生姓名" target="_blank" class="name">姓名</a>

@@ -20,4 +20,34 @@
         insert  into
         appointment (ap_user_id,ap_doc_id,ap_time,ap_status)values (#{ap_user_id},#{ap_doc_id},now(),1)
     </insert>
+
+    <select id="getNo" resultType="Appointment">
+        select *
+        from appointment
+        <where>
+            ap_status = 1
+            <if test="ap_user_id != null and ap_user_id != ''">
+            and ap_user_id = #{ap_user_id}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateStatus">
+        UPDATE appointment
+		set ap_status = 2
+		where DATE(NOW()) - DATE(ap_time) > 31
+		<if test="ap_id != null and ap_id != ''">
+            ap_id = #{ap_id}
+        </if>
+    </update>
+    
+    <select id="getYes" resultType="User">
+        select u_name,u_phone
+		from user
+        where u_id in (
+        select ap_user_id
+        from appointment
+        where ap_doc_id in
+        (select d_id from doctor where d_num > 0))
+    </select>
 </mapper>

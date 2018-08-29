@@ -1,21 +1,15 @@
 package com.kx.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.kx.dao.AppointmentMapper;
 import com.kx.pojo.Appointment;
 import com.kx.pojo.Doctor;
 import com.kx.service.AppointmentService;
-import org.jboss.logging.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.jws.WebParam;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -44,6 +38,13 @@ public class AppointmentController {
         int result = appointmentService.addAppointment(String.valueOf(ap_user_id),String.valueOf(ap_doc_id));
         System.out.println(result + "-----result----------------------------");
         return result;
+    }
+
+    @RequestMapping("/getNo")
+    //查询预约未完成的记录(预约对象)   可以根据id 查询个人(用户自己操作)
+    public @ResponseBody List<Appointment> getNo(String ap_user_id){
+        List<Appointment> appointmentList = appointmentService.getNo(ap_user_id);
+        return  appointmentList;
     }
 
 }

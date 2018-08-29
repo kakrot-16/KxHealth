@@ -16,19 +16,6 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <script type="text/javascript" src="../static/js/jquery-1.12.4.js"></script>
-        <%
-        Hospital hospital = (Hospital) request.getAttribute("hospital");
-        DoctorWork doctorWork = (DoctorWork) request.getAttribute("doctorWork");
-        Department1 department1 = (Department1) request.getAttribute("department1");
-        if (hospital == null){
-        String d_id = request.getParameter("d_id");
-        String d_department1 = request.getParameter("d_department1");
-        System.out.println("jsp中--------------"+d_id+"   "+d_department1);
-        String path = request.getContextPath();
-        request.getRequestDispatcher(path+"/doctorWork/getInfo?d_id="+d_id+"&d_department1="+d_department1).forward(request,response);
-        }
-        %>
-
 <body>
 <script>
     $(() => {
@@ -74,21 +61,15 @@
                         <dl>
                             <dt><span class="yygh_box_con_dl_span1"></span></dt>
                             <dd>医院地址:&nbsp;&nbsp; <span style="color: black;">${hospital.h_address}</span></dd>
-                        </dl>
+                        </dl><br>
                         <dl>
                             <dt><span class="yygh_box_con_dl_span2"></span></dt>
                             <dd><p>医院网址:&nbsp;&nbsp; <a href="${hospital.h_url}" target="_blank"
                                                         style="color: black">${hospital.h_url}</a></p></dd>
-                        </dl>
+                        </dl><br>
                         <dl>
                             <dt><span class="yygh_box_con_dl_span3"></span></dt>
                             <dd><p>医院总机查号台: &nbsp;&nbsp; <span style="color: black">${department1.d1_tel}</span></p>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt><span class="yygh_box_con_dl_span4"></span></dt>
-                            <dd><p> 东院：106,108,110,111,116,684,685到东单路口北； 41,104快，814到东单路口南；
-                                1,52,802到东单路口西；20,25,37，39,到东单路口东；103,104,420，803到新东安市场；地铁1、5号线到东单。西院：68到辟才胡同东口；更多乘车路线详见须知 </p>
                             </dd>
                         </dl>
                     </dd>
