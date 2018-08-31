@@ -17,6 +17,15 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <script type="text/javascript" src="../static/js/jquery-1.12.4.js"></script>
 <body>
+<style>
+     .g-container {
+        padding: 20px;
+        background-color: #164583;
+        background-color: rgba(22, 69, 131, .04);
+        border-radius: 8px;
+        border: none;
+    }
+</style>
 <script>
     $(() => {
         var date = new Date();
@@ -43,37 +52,44 @@
     getNextWeek();
     })
 </script>
-
-<div id="ksorder_top">
-    <div class="ksorder_box">
-        <div class="ksorder_box_top">
-            <p class="ksorder_box_top_p">
-                <strong><strong style="font-size: 20px;color: #00b3ec">${hospital.h_name}</strong>&nbsp;&nbsp;—&nbsp;&nbsp;<strong
-                        style="color: #0caf33">${department1.d1_name}</strong></strong>
+<div class="g-container">
+    <div id="ksorder_top">
+    <div  style="padding: 10px 0;">
+        <a href="../index.jsp" style="color: #377bee;">首页&nbsp;&nbsp;</a>&gt;
+        <span>&nbsp;&nbsp;医生排班</span>
+    </div>
+    <div class="g-container" >
+        <div class="ksorder_box" style="background-color: #f0efef">
+            <div class="ksorder_box_top" style="background-color: #f0efef">
+                <p class="ksorder_box_top_p">
+                    <strong><strong style="font-size: 20px;color: #00b3ec">${hospital.h_name}</strong>&nbsp;&nbsp;—&nbsp;&nbsp;<strong
+                            style="color: #0caf33">${department1.d1_name}</strong></strong>
                 <p type="hidden" id="dId" value="200003979"/>
-            </p>
-        </div>
-        <div class="ksorder_box_content">
-            <div class="ksorder_c_left">
-                <dl class="ksorder_box_con_dl">
-                    <dt><img src="../static/img/1.jpg"></dt>
-                    <dd>
-                        <dl>
-                            <dt><span class="yygh_box_con_dl_span1"></span></dt>
-                            <dd>医院地址:&nbsp;&nbsp; <span style="color: black;">${hospital.h_address}</span></dd>
-                        </dl><br>
-                        <dl>
-                            <dt><span class="yygh_box_con_dl_span2"></span></dt>
-                            <dd><p>医院网址:&nbsp;&nbsp; <a href="${hospital.h_url}" target="_blank"
-                                                        style="color: black">${hospital.h_url}</a></p></dd>
-                        </dl><br>
-                        <dl>
-                            <dt><span class="yygh_box_con_dl_span3"></span></dt>
-                            <dd><p>医院总机查号台: &nbsp;&nbsp; <span style="color: black">${department1.d1_tel}</span></p>
-                            </dd>
-                        </dl>
-                    </dd>
-                </dl>
+                </p>
+            </div>
+            <div class="ksorder_box_content" style="background-color: #f0efef">
+                <div class="ksorder_c_left">
+                    <dl class="ksorder_box_con_dl" );
+">
+                        <dt><img src="../static/img/${hospital.h_door_img}"></dt>
+                        <dd>
+                            <dl>
+                                <dt><span class="yygh_box_con_dl_span1"></span></dt>
+                                <dd>医院地址:&nbsp;&nbsp; <span style="color: #333;">${hospital.h_address}</span></dd>
+                            </dl><br>
+                            <dl>
+                                <dt><span class="yygh_box_con_dl_span2"></span></dt>
+                                <dd><p>医院网址:&nbsp;&nbsp; <a href="${hospital.h_url}" target="_blank"
+                                                            style="color: #333">${hospital.h_url}</a></p></dd>
+                            </dl><br>
+                            <dl>
+                                <dt><span class="yygh_box_con_dl_span3"></span></dt>
+                                <dd><p>医院总机查号台: &nbsp;&nbsp; <span style="color: #333">${department1.d1_tel}</span></p>
+                                </dd>
+                            </dl>
+                        </dd>
+                    </dl>
+                </div>
             </div>
         </div>
     </div>
@@ -188,7 +204,6 @@
                 </div>
             </div>
             <div class="ksorder_cen_l_r">
-
             </div>
         </div>
         <!--放号提醒-->
@@ -220,6 +235,8 @@
         </div>
     </div>
 </div>
+
+
 <div id="footer">
     <div class="footer_nb">
         <div class="footer_img">
@@ -245,4 +262,5 @@
             <span class="footer_ewm_span"><img src="../static/img/footer_ewm.png"></span>
         </div>
     </div>
+</div>
 </div>

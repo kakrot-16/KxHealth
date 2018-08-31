@@ -6,9 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,10 +26,19 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @RequestMapping("/add")
-    public String list(Orders order, HttpSession session){
-        int result = ordersService.addOrder(order);
-        session.setAttribute("result", result);
-        return "redirect:/test.jsp";
+    public synchronized String list(Orders order,HttpSession session){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String or_data_time = formatter.format(order.getOr_data_time());
+        System.out.println(or_data_time);
+        int status = ordersService.getResidueStatus(String.valueOf(order.getOr_doc_id()),or_data_time);
+        System.out.println(status+"~~~~~~~~~~~~~~~~~~~数据库返回状态码1有号");
+        int result =0;
+        //等于1说明有号
+        if (status == 1) {
+             result = ordersService.addOrder(order);
+        }
+        session.setAttribute("result",result);
+        return "test";
     }
 
     @RequestMapping("/userQueryOrder")

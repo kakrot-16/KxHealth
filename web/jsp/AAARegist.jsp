@@ -39,7 +39,7 @@
             $.ajax({
                 url:"<%=request.getContextPath()%>/hospital/getAll" ,
                 dataType:"text",
-                type:"get",
+                type:"post",
                 success:function (data) {
                     $("#se1").html("");
                     var xqo = eval('(' + data + ')');
@@ -54,7 +54,7 @@
                         $.ajax({
                             url: "<%=request.getContextPath()%>/department1/getAll",
                             data: {"id": se1},
-                            type: "get",
+                            type: "post",
                             dataType: "json",
                             success: function (data) {
                                 $("#se2").html("");
@@ -69,7 +69,7 @@
                                     $.ajax({
                                         url: "<%=request.getContextPath()%>/department2/getAll",
                                         data: {"id": se2},
-                                        type: "get",
+                                        type: "post",
                                         dataType: "json",
                                         success: function (data) {
                                             $("#se3").html("");
@@ -84,7 +84,7 @@
                                                 $.ajax({
                                                     url: "<%=request.getContextPath()%>/doctor/getDocByOption",
                                                     data: {"d_hospital": se1, "d_department1": se2,"d_department2":se3},
-                                                    type: "get",
+                                                    type: "post",
                                                     dataType: "json",
                                                     success: function (data) {
                                                         $("#se4").html("");
@@ -113,7 +113,7 @@
                 $.ajax({
                     url: "<%=request.getContextPath()%>/department1/getAll",
                     data: {"id": se1},
-                    type: "get",
+                    type: "post",
                     dataType: "json",
                     success: function (data) {
                         $("#se2").html("");
@@ -128,7 +128,7 @@
                             $.ajax({
                                 url: "<%=request.getContextPath()%>/department2/getAll",
                                 data: {"id": se2},
-                                type: "get",
+                                type: "post",
                                 dataType: "json",
                                 success: function (data) {
                                     $("#se3").html("");
@@ -143,7 +143,7 @@
                                         $.ajax({
                                             url: "<%=request.getContextPath()%>/doctor/getDocByOption",
                                             data: {"d_hospital": se1, "d_department1": se2,"d_department2":se3},
-                                            type: "get",
+                                            type: "post",
                                             dataType: "json",
                                             success: function (data) {
                                                 $("#se4").html("");
@@ -169,7 +169,7 @@
                 $.ajax({
                     url: "<%=request.getContextPath()%>/department2/getAll",
                     data: {"id": se2},
-                    type: "get",
+                    type: "post",
                     dataType: "json",
                     success: function (data) {
                         $("#se3").html("");
@@ -184,7 +184,7 @@
                             $.ajax({
                                 url: "<%=request.getContextPath()%>/doctor/getDocByOption",
                                 data: {"d_hospital": se1, "d_department1": se2, "d_department2": se3},
-                                type: "get",
+                                type: "post",
                                 dataType: "json",
                                 success: function (data) {
                                     $("#se4").html("");
@@ -243,30 +243,48 @@
                     <%--var ap_user_id = <%=user.getU_id()%>;//用户id--%>
                     var ap_user_id = 1;//用户id
                     var ap_doc_id = 1;//医生id
-                    $.ajax({
-                        url: "<%=request.getContextPath()%>/appointment/add",
-                        // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
-                        data: "ap_user_id=" + ap_user_id + "&ap_doc_id=" + ap_doc_id,
-                        type: "post",
-                        dataType: "text",
-                        success: function (data) {
-                            if (data > 0) {
-                                swal({
-                                    title: "预约成功,医生有号时我们会短信通知您",
-                                    text: "要跳转回首页吗？",
-                                    type: "success",
-                                    showCancelButton: true,
-                                    closeOnConfirm: false,
-                                    confirmButtonText: "是的，我要回首页",
-                                    confirmButtonColor: "#1fd783"
-                                }, function () {
-                                    window.location.replace("../index.jsp");
-                                });
-                            } else {
-                                swal("预约失败")
+                    var now = new Date();
+                    var nt = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
+                    var time1 = new Date(time.replace("-", "/").replace("-", "/"));
+                    var time2 = new Date(nt.replace("-", "/").replace("-", "/"));
+                    if (time2 - time1 >= 0) {
+                        swal("请选择正确的预约时间");
+                    } else {
+                        $.ajax({
+                            url: "<%=request.getContextPath()%>/appointment/add",
+                            // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
+                            data: "ap_user_id=" + ap_user_id + "&ap_doc_id=" + ap_doc_id,
+                            type: "post",
+                            dataType: "text",
+                            success: function (data) {
+                                if (data > 0 && data != 233) {
+                                    swal({
+                                        title: "预约成功,医生有号我们将短信通知您",
+                                        text: "要跳转回首页吗？",
+                                        type: "success",
+                                        showCancelButton: true,
+                                        closeOnConfirm: false,
+                                        confirmButtonText: "是的，我要回首页",
+                                        confirmButtonColor: "#1fd783"
+                                    }, function () {
+                                        window.location.replace("../index.jsp");
+                                    });
+                                } else if (data == 233) {
+                                    swal({
+                                        title: "预约超限,预约次数不可超出三次。",
+                                        text: "要跳转回首页吗？",
+                                        type: "error",
+                                        showCancelButton: true,
+                                        closeOnConfirm: false,
+                                        confirmButtonText: "是的，我要回首页",
+                                        confirmButtonColor: "#1fd783"
+                                    }, function () {
+                                        window.location.replace("../index.jsp");
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
         });
     });

@@ -32,4 +32,7 @@ public interface OrdersMapper {
     List<Orders> userQueryOrder(String u_id);
     List<Orders> docQueryOrder(@Param("d_id") String d_id, @Param("u_name") String u_name, @Param("or_time1") String or_time1, @Param("or_time2") String or_time2);
 
+    //查询是否还有剩余挂号
+    int getResidueStatus(@Param("or_doc_id") String or_doc_id,@Param("or_data_time") String or_data_time);
+
 }

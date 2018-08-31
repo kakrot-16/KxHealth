@@ -4,10 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kx.dao.OrdersMapper">
     <insert id="addOrder" parameterType="Orders" >
-/*(or_buyer_id,or_name,or_doc_id,or_sex,or_id_card,or_time,or_data_time,or_price,or_payid,or_type)*/
         insert into Orders
-        values (#{or_id},#{or_buyer_id},#{or_name},#{or_doc_id},#{or_sex},#{or_id_card},now(),now(),#{or_price},#{or_payId},1)
+        values (#{or_id},#{or_buyer_id},#{or_name},#{or_doc_id},#{or_sex},#{or_id_card},now(),#{or_data_time},#{or_price},#{or_payId},1)
     </insert>
+    <select id="getResidueStatus" resultType="int">
+            select COUNT(1) &lt; (select d_num from doctor where d_id = #{or_doc_id})
+            from appointment
+            where ap_doc_id = #{or_doc_id}
+            and ap_status = 1
+            and ap_time = #{or_data_time}
+    </select>
     <update id="updateOrder" parameterType="String">
         update orders
         set or_type=1

@@ -45,10 +45,9 @@
 <div class="QMSub QMSubMenus">
 <ul><li><a href="jsp/AAAyuyue.jsp" title="就诊流程">就诊流程<span>进入</span></a></li><li><a href="keshi.html" title="科室导航">科室导航<span>进入</span></a></li><li><a href="chuzhen.html" title="出诊安排">出诊安排<span>进入</span></a></li><li><a href="ArticleList-56.html" title="住院指南">住院指南<span>进入</span></a></li><li><a href="Article-57.html" title="来院路线">来院路线<span>进入</span></a></li><li><a href="ArticleList-10.html" title="医保服务">医保服务<span>进入</span></a></li></ul><ul><li><a href="Telephone.html" title="电话查询">电话查询<span>进入</span></a></li><li><a href="Article-65.html" title="信息查询">信息查询<span>进入</span></a></li><li><a href="Distribution.html" title="省医地图">省医地图<span>进入</span></a></li></ul><div class="clear"></div></div></li>
 
-<li class="first"><a href="jsp/AAARegist.jsp" target="_self" class="firstA"><em>预约挂号</em><i class="style02"></i><span></span></a><div class="QMSub QMSubMenus">
-<ul><li><a href="jsp/AAARegist.jsp" >普通挂号<span>进入</span></a></li>
-<li><a href="jsp/AAARegist.jsp" >预约挂号<span>进入</span></a></li>
-<li><a href="jsp/AAARegist.jsp" >快速挂号<span>进入</span></a></li>
+<li class="first"><a href="hospital/regist" target="_self" class="firstA"><em>预约挂号</em><i class="style02"></i><span></span></a><div class="QMSub QMSubMenus">
+<ul><li><a href="hospital/regist" >普通挂号<span>进入</span></a></li>
+<li><a href="hospital/regist" >医生提前预约<span>进入</span></a></li>
 </ul><div class="clear"></div></div></li>
 
 

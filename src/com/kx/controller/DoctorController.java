@@ -5,6 +5,7 @@ import com.kx.service.DoctorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ public class DoctorController {
     @Resource
     private DoctorService doctorService;
 
-    @RequestMapping("/getDocByOption")
+    @RequestMapping(value = "/getDocByOption",method = RequestMethod.POST)
     public @ResponseBody List<Doctor> getDoc(Doctor doctor){
         System.out.println("进入了================"+doctor.getD_type());
         List<Doctor> doctorList = doctorService.getDocByOption(doctor);

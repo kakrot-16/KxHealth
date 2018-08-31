@@ -40,4 +40,9 @@ public class OrdersServiceImpl implements OrdersService {
         return ordersMapper.docQueryOrder(d_id,u_name,or_time1,or_time2);
     }
 
+    @Override
+    public int getResidueStatus(String or_doc_id,String or_data_id) {
+        return ordersMapper.getResidueStatus(or_doc_id,or_data_id);
+    }
+
 }

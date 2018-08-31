@@ -26,4 +26,7 @@ public interface AppointmentService {
 
         //定时到数据库获取预约表 并发现有医生排班向预约人发送短信通知
         List<User> getYes();
+
+    //查询用户预约了多少
+    int getNoNum(String ap_user_id);
 }

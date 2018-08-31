@@ -21,6 +21,12 @@
         appointment (ap_user_id,ap_doc_id,ap_time,ap_status)values (#{ap_user_id},#{ap_doc_id},now(),1)
     </insert>
 
+    <select id="getNoNum" resultType="int">
+        select COUNT(1)
+        from appointment
+        where ap_user_id = #{ap_user_id}
+    </select>
+
     <select id="getNo" resultType="Appointment">
         select *
         from appointment

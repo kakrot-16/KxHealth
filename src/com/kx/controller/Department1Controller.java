@@ -22,7 +22,7 @@ public class Department1Controller {
     @Resource
     private Department1Service department1Service;
 
-    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public @ResponseBody List<Department1> getAll( String id){
         System.out.println("department1Mapper------------------------------------"+id);
         List<Department1> department1List = department1Service.getDe1ListById(id);

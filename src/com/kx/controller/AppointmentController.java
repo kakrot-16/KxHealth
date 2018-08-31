@@ -34,10 +34,17 @@ public class AppointmentController {
     public @ResponseBody int addAppointment(Appointment appointment){
         int ap_user_id = appointment.getAp_user_id();
         int ap_doc_id = appointment.getAp_doc_id();
-        System.out.println("进入添加预约记录============="+appointment.getAp_doc_id()+" "+appointment.getAp_user_id()+"================");
-        int result = appointmentService.addAppointment(String.valueOf(ap_user_id),String.valueOf(ap_doc_id));
-        System.out.println(result + "-----result----------------------------");
-        return result;
+        int num = appointmentService.getNoNum(String.valueOf(ap_user_id));
+        System.out.println(num+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        int result = 0;
+        if(num > 3){
+            return 233;
+        }else {
+            System.out.println("进入添加预约记录=============" + appointment.getAp_doc_id() + " " + appointment.getAp_user_id() + "================");
+            result = appointmentService.addAppointment(String.valueOf(ap_user_id), String.valueOf(ap_doc_id));
+            System.out.println(result + "-----result----------------------------");
+            return result;
+        }
     }
 
     @RequestMapping("/getNo")
@@ -46,5 +53,6 @@ public class AppointmentController {
         List<Appointment> appointmentList = appointmentService.getNo(ap_user_id);
         return  appointmentList;
     }
+
 
 }

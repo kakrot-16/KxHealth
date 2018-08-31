@@ -20,5 +20,8 @@ public interface Department2Mapper {
     List<Department2> getDepartmentList(Department2 department2);
     //寻找二级科室的方法(已测)
     List<Department2> getDe1ListById(String id);//张帅
+    //查找二级科室简介   张帅
+    String getInfo(String d2_name);
+
 
 }

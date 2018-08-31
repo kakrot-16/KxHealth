@@ -100,11 +100,11 @@
         select *
         from doctor
         where d_hospital =#{d_hospital}
-        and d_department1 = #{d_department1}
         and d_department2 = #{d_department2}
         <if test="d_type != null and d_type != ''">
             and d_type = #{d_type}
         </if>
+        and d_num > 0
     </select>
 
 </mapper>

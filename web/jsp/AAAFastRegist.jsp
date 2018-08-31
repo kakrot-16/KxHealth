@@ -15,10 +15,45 @@
     <script src="../static/js/zs-bootstrap.min.js" type="text/javascript"></script>
     <script src="../static/js/zs-bootstrap-paginator.js" type="text/javascript"></script>
 </head>
+<style>
+    body{
+        background-color: rgba(22, 69, 131, .04);
+    }
+    .g-container {
+        padding: 20px;
+        background-color: #164583;
+        background-color: rgba(22, 69, 131, .04);
+        border-radius: 8px;
+        border: none;
+        background-color: rgba(22, 69, 131, .04);
+    }
+    #ksorder_top {
+        width: 1000px;
+        margin: 0 auto;
+    }
+</style>
 <script>
     $(function () {
-        ajax();
         var d_type = "";
+        var strTime = "";
+        var endTime = "";
+        var d_hospital = 1;
+        var d_department2 = 1;
+        ajax();
+        jianJie();
+        function jianJie(){
+            var d2_name = "普外科";
+            $.ajax({
+                url:"<%=request.getContextPath()%>/department2/getInfo",
+                data:{"d2_name":d2_name},
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    alert(data)
+                    $("#d2_info").html(data)
+                }
+            });
+        }
         $("#aa,#bb").click(function () {
             d_type1 = $(this).attr("value");
             $("#ul").attr("class",d_type1);
@@ -31,11 +66,9 @@
             <%--${doctor.d_hospital}--%>
             d_type = $("#ul").attr("class");
             $("#ul").attr("class","");
-            var d_hospital = 1;
-            var d_department1 = 1;
             $.ajax({
                 url: "<%=request.getContextPath()%>/doctor/getDocByOption",
-                data: {"d_hospital": d_hospital, "d_department1": d_department1,"d_type":d_type},
+                data: {"d_hospital": d_hospital, "d_department2": d_department2,"d_type":d_type},
                 type: "get",
                 dataType: "json",
                 success: function (data) {
@@ -56,7 +89,7 @@
                             "            <div class=\"g-doc-baseinfo g-left\">\n" +
                             "                <a target=\"_blank\" \"\n" +
                             "                   onmousedown=\"return _smartlog(this,'DOCP_1')\" class=\"img\">\n" +
-                            "                    <img src=\"../static/images/0.png\" class=\"img\" alt=\"卞华\" />\n" +
+                            "                    <img src=\"../static/images/"+data[p].d_picture+"\" class=\"img\" />\n" +
                             "                    <dt>\n" +
                             "                        <a  class=\"name js-doc\"\n" +
                             "                            target=\"_blank\" onmousedown=\"return _smartlog(this,'DOCN_1')\">\n" +
@@ -71,7 +104,7 @@
                             "                           onmousedown=\"return _smartlog(this,'DOCD')\"\n" +
                             "                           target=\"_blank\"\n" +
                             "                        >\n" +
-                            "                            "+g2+"\n" +
+                            "                           &nbsp;&nbsp;&nbsp;"+g2+"\n" +
                             "                        </a>\n" +
                             "                    </dd>\n" +
                             "                    </dl>\n" +
@@ -101,15 +134,19 @@
         }
     });
 </script>
-<body class="g-1200px g-page-1200">
-<div class="gh-nav">
-	<div class="container g-clear">
-	<div id="gc">
+<div id="ksorder_top">
+<div class="" style="width: 980px">
+    <div  style="padding: 10px 0;font-size: 12px;width: auto">
+        <a href="../index.jsp" style="color: #377bee;">首页&nbsp;&nbsp;</a>&gt;
+        <span>&nbsp;&nbsp;科室定位</span>
+    </div>
+</div>
+</div>
 <div class="gp-search g-container" id="g-cfg" data-page="expert_in" data-module="search"  data-loadpop="remind">
     <div class="filter-tip">
         <div class="filter-condition" id="J_SelCondition">
         </div>
-            <span class="result-num" style="font-size: 15px">找到<strong id="J_ResultNum"> <span id="num"></span> </strong>位医生</span>
+            <span class="result-num" style="    font-size: 15px">找到<strong id="J_ResultNum"> <span id="num"></span> </strong>位医生</span>
     </div>
 	<!-- .results -->
 	<div class="results">
@@ -117,25 +154,22 @@
 		<div class="filter-new indept-filter J_Filter">
                 <div class="condition-wrap in-condition-wrap">
                         <div class="condition J_dt">
-                            <div class="condition-title"><a id="all">医生职称</a></div>
+                            <div class="condition-title"><a id="all" style="cursor:pointer;margin: 4px 2px">医生职称</a></div>
                             <div class="condition-content condition-collapse J_CT">
                                 <ul id="ul" class="">
                                     <%--如：<a id="aa" href="" value="123">aa</a>
                                             $("#aa").attr("value")得到的值就是123--%>
-                                    <li><a id="aa"  value="主任医师" >主任医师</a></li>
-                                    <li><a id="bb"  value="副主任医师" >副主任医师</a></li>
+                                    <li><a id="aa"  value="主任医师" style="cursor:pointer;margin: 4px">主任医师</a></li>
+                                    <li><a id="bb"  value="副主任医师" style="cursor:pointer;margin: 4px">副主任医师</a></li>
                                 </ul>
                             </div>
                         </div>
                 </div>
                 <div class="gfm-inline gfm-thin top">
                     <div class="gfm-field date-range J_DateRange" >
-                        <label class="date-title">就诊日期：</label>
-                        <span class="picker-mask g-datepicker">
-                            <input type="date" name="ed" value="不限" class="gfm-input gfm-input-s J_Submit J_DateF" data-code="SXRQF" />
-                        </span>
-                        <span class="picker-mask g-datepicker">
-                            &nbsp;-&nbsp;<input type="date" name="edt" value="不限" class="gfm-input gfm-input-s J_Submit J_DateT" data-code="SXRQT" />
+                        <label class="date-title">科室简介：</label>
+                        <span class="picker-mask g-datepicker" id="d2_info">
+
                         </span>
                     </div>
                 </div>

@@ -46,6 +46,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getDe1ListById" resultType="Department2">
         select *
         from department2
-        where d2_d1_id = #{id}
+         where d2_d1_id = #{id}
+    </select>
+
+    <select id="getInfo" resultType="String">
+        select d2_info
+        from Department2
+        where d2_name = #{d2_name}
     </select>
 </mapper>

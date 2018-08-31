@@ -15,4 +15,6 @@ public interface Department2Service {
     List<Department2> getDepartmentList(Department2 department2);
     //查找二级科室  张帅
     List<Department2> getDe1ListById(String id);
+    //查找二级科室简介   张帅
+    String getInfo(String d2_name);
 }

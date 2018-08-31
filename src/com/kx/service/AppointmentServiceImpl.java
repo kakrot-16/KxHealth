@@ -43,4 +43,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<User> getYes() {
         return appointmentMapper.getYes();
     }
+
+    @Override
+    public int getNoNum(String ap_user_id) {
+        return appointmentMapper.getNoNum(ap_user_id);
+    }
 }

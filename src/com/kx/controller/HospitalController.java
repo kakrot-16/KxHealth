@@ -2,6 +2,7 @@ package com.kx.controller;
 
 import com.kx.dao.HospitalMapper;
 import com.kx.pojo.Hospital;
+import com.kx.pojo.User;
 import com.kx.service.HospitalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +25,17 @@ public class HospitalController {
     @Resource
     private HospitalService hospitalService;
 
+    @RequestMapping("/regist")
+    public String go(Model model){
+        return "AAARegist";
+    }
 
+    @RequestMapping("/doctor")
+    public String go2(Model model){
+        return "AAAFastRegist";
+    }
 
-    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
+    @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public  @ResponseBody List<Hospital> getAll2( Hospital hospital){
         System.out.println("进入hosital-----------------------------------");
         List<Hospital> hospitalList = hospitalService.getAll(hospital);
