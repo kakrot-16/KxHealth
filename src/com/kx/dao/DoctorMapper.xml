@@ -104,7 +104,12 @@
         <if test="d_type != null and d_type != ''">
             and d_type = #{d_type}
         </if>
-        and d_num > 0
+        and d_grade = 1
     </select>
 
+    <select id="getD_num" resultType="int">
+        select d_num
+        from doctor
+        where d_id = #{d_id}
+    </select>
 </mapper>

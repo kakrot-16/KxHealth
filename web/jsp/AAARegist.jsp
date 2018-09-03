@@ -207,7 +207,7 @@
                 $.ajax({
                     url: "<%=request.getContextPath()%>/doctor/getDocByOption",
                     data: {"d_hospital": se1, "d_department1": se2, "d_department2": se3},
-                    type: "get",
+                    type: "post",
                     dataType: "json",
                     success: function (data) {
                         $("#se4").html("");
@@ -241,7 +241,7 @@
                     swal("请选择所有选项")
                 } else {
                     <%--var ap_user_id = <%=user.getU_id()%>;//用户id--%>
-                    var ap_user_id = 1;//用户id
+                    var ap_user_id = <%%>;//用户id
                     var ap_doc_id = 1;//医生id
                     var now = new Date();
                     var nt = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();

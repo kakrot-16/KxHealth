@@ -52,6 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getInfo" resultType="String">
         select d2_info
         from Department2
-        where d2_name = #{d2_name}
+        where d2_id = #{d_department2}
     </select>
 </mapper>

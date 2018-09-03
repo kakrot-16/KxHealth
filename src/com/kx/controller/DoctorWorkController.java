@@ -4,10 +4,7 @@ import com.kx.dao.Department1Mapper;
 import com.kx.dao.HospitalMapper;
 import com.kx.dao.OrdersMapper;
 import com.kx.pojo.*;
-import com.kx.service.Department1Service;
-import com.kx.service.DoctorWorkService;
-import com.kx.service.HospitalService;
-import com.kx.service.NumAndDateService;
+import com.kx.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,12 +34,15 @@ public class DoctorWorkController {
     private Department1Service department1Service;
     @Resource
     private NumAndDateService numAndDateService;
+    @Resource
+    private DoctorService doctorService;
 
     //医生Id 医生所在一级科室id 获取医院信息  获得医生的排班情况
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public String get(Doctor doctor, Model model){
         System.out.println(doctor.getD_id()+"**~~~~~~~~~~~~~~~~~~~~~~"+doctor.getD_department1()+"~~~~~~~~~~~~~~~~~~~~~");
         Hospital hospital = hospitalService.getSingle(doctor);
+        int d_num = doctorService.getD_num(doctor.getD_id());
         DoctorWork doctorWork = doctorWorkService.getSingle(doctor);
         System.out.println(doctorWork.getW_workDate() + "-------------");
         Department1 department1 = department1Service.getTel(doctor);
@@ -56,6 +56,7 @@ public class DoctorWorkController {
             timeList[i] = sdf.format(monday);
             c.add(Calendar.DATE, +1);
         }
+        model.addAttribute("d_num", d_num);
         model.addAttribute("timeList", timeList);
         model.addAttribute("list", list);
         model.addAttribute("department1", department1);//医院电话

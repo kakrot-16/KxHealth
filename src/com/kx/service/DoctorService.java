@@ -19,4 +19,6 @@ public interface DoctorService {
     List<Doctor> getDoc(Doctor doctor);
     //张帅添加
     List<Doctor> getDocByOption(Doctor doctor);
+    // 获取单个医生的放号数量 张帅
+    int getD_num(int d_id);
 }

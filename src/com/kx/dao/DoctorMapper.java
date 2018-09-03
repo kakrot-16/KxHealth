@@ -20,4 +20,6 @@ public interface DoctorMapper {
     List<Doctor> getDoc(Doctor doctor);
     // 通过科室id,医院id 查询医生 张帅添加
     List<Doctor> getDocByOption(Doctor doctor);
+    // 获取单个医生的放号数量 张帅
+    int getD_num(int d_id);
 }

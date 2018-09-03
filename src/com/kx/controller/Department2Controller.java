@@ -27,10 +27,10 @@ public class Department2Controller {
         return  department2List;
     }
 
-    @RequestMapping("/getInfo")
-    public String getInfo(String d2_name){
-        System.out.println("d2@@@@@@@@@@@@@@@@@@@@@@@@@@" + d2_name);
-        String info = department2Service.getInfo(d2_name);
+    @RequestMapping(value="/getInfo",produces={"text/html;charset=UTF-8;"})
+    public @ResponseBody String getInfo(String d2_id){
+        System.out.println("d2@@@@@@@@@@@@@@@@@@@@@@@@@@" + d2_id);
+        String info = department2Service.getInfo(d2_id);
         System.out.println("info`````````````"+info);
         return  info;
     }

@@ -42,4 +42,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> getDocByOption(Doctor doctor) {
         return doctorMapper.getDocByOption(doctor);
     }
+
+    @Override
+    public int getD_num(int d_id) {
+        return doctorMapper.getD_num(d_id);
+    }
 }
