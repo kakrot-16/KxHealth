@@ -3,6 +3,7 @@ package com.kx.dao;
 import com.kx.pojo.Doctor;
 import com.kx.pojo.Orders;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.core.annotation.Order;
 
 import java.util.Date;
 import java.util.List;
@@ -35,4 +36,9 @@ public interface OrdersMapper {
     //查询是否还有剩余挂号
     int getResidueStatus(@Param("or_doc_id") String or_doc_id,@Param("or_data_time") String or_data_time);
 
+    //订单号拼接工具类 张帅
+    int queryOrdersStr(String ordersStr);
+
+    //个人查看自己的订单历史
+    List<Orders> getOrdersByUserId(String u_id);
 }

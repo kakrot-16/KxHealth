@@ -48,4 +48,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public int getNoNum(String ap_user_id) {
         return appointmentMapper.getNoNum(ap_user_id);
     }
+
+    @Override
+    public List<Appointment> getAppointmentByUserId(String u_id) {
+        return appointmentMapper.getAppointmentByUserId(u_id);
+    }
 }

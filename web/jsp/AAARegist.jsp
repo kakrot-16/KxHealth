@@ -240,52 +240,56 @@
                     (time == null || time == '') || (se4 == null || se4 == '')) {
                     swal("请选择所有选项")
                 } else {
-                    <%--var ap_user_id = <%=user.getU_id()%>;//用户id--%>
-                    var ap_user_id = <%%>;//用户id
-                    var ap_doc_id = 1;//医生id
-                    var now = new Date();
-                    var nt = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
-                    var time1 = new Date(time.replace("-", "/").replace("-", "/"));
-                    var time2 = new Date(nt.replace("-", "/").replace("-", "/"));
-                    if (time2 - time1 >= 0) {
-                        swal("请选择正确的预约时间");
-                    } else {
-                        $.ajax({
-                            url: "<%=request.getContextPath()%>/appointment/add",
-                            // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
-                            data: "ap_user_id=" + ap_user_id + "&ap_doc_id=" + ap_doc_id,
-                            type: "post",
-                            dataType: "text",
-                            success: function (data) {
-                                if (data > 0 && data != 233) {
-                                    swal({
-                                        title: "预约成功,医生有号我们将短信通知您",
-                                        text: "要跳转回首页吗？",
-                                        type: "success",
-                                        showCancelButton: true,
-                                        closeOnConfirm: false,
-                                        confirmButtonText: "是的，我要回首页",
-                                        confirmButtonColor: "#1fd783"
-                                    }, function () {
-                                        window.location.replace("../index.jsp");
-                                    });
-                                } else if (data == 233) {
-                                    swal({
-                                        title: "预约超限,预约次数不可超出三次。",
-                                        text: "要跳转回首页吗？",
-                                        type: "error",
-                                        showCancelButton: true,
-                                        closeOnConfirm: false,
-                                        confirmButtonText: "是的，我要回首页",
-                                        confirmButtonColor: "#1fd783"
-                                    }, function () {
-                                        window.location.replace("../index.jsp");
-                                    });
+                    var ap_user_id =${user.u_id};//用户id
+                    if(ap_user_id == 0){
+                    	swal("请登录")
+                    }else{
+                    	var ap_doc_id = $("#se4").val();//医生id
+                        console.log(ap_user_id+"   "+ap_doc_id);
+                        var now = new Date();
+                        var nt = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
+                        var time1 = new Date(time.replace("-", "/").replace("-", "/"));
+                        var time2 = new Date(nt.replace("-", "/").replace("-", "/"));
+                        if (time2 - time1 >= 0) {
+                            swal("请选择正确的预约时间");
+                        } else {
+                            $.ajax({
+                                url: "<%=request.getContextPath()%>/appointment/add",
+                                // data:"{'ap_user_id':"+ap_user_id+",'ap_doc_id':"+ap_doc_id+"}",
+                                data: "ap_user_id=" + ap_user_id + "&ap_doc_id=" + ap_doc_id,
+                                type: "post",
+                                dataType: "text",
+                                success: function (data) {
+                                    if (data > 0 && data != 233) {
+                                        swal({
+                                            title: "预约成功,医生有号我们将短信通知您",
+                                            text: "要跳转回首页吗？",
+                                            type: "success",
+                                            showCancelButton: true,
+                                            closeOnConfirm: false,
+                                            confirmButtonText: "是的，我要回首页",
+                                            confirmButtonColor: "#1fd783"
+                                        }, function () {
+                                            window.location.replace("../index.jsp");
+                                        });
+                                    } else if (data == 233) {
+                                        swal({
+                                            title: "预约超限,预约次数不可超出三次。",
+                                            text: "要跳转回首页吗？",
+                                            type: "error",
+                                            showCancelButton: true,
+                                            closeOnConfirm: false,
+                                            confirmButtonText: "是的，我要回首页",
+                                            confirmButtonColor: "#1fd783"
+                                        }, function () {
+                                            window.location.replace("../index.jsp");
+                                        });
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
-                }
+                    }
         });
     });
 </script>
@@ -428,6 +432,6 @@
 						<a target="_blank"   rel="nofollow" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="../static/img/ghs.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010902000463号</p></a>
 					</div>
 			</div>
-		</div> 
+		</div>
 </body>
 </html>

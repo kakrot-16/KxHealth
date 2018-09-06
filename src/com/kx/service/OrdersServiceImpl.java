@@ -45,4 +45,14 @@ public class OrdersServiceImpl implements OrdersService {
         return ordersMapper.getResidueStatus(or_doc_id,or_data_id);
     }
 
+    @Override
+    public int queryOrdersStr(String ordersStr) {
+        return ordersMapper.queryOrdersStr(ordersStr);
+    }
+
+    @Override
+    public List<Orders> getOrdersByUserId(String u_id) {
+        return ordersMapper.getOrdersByUserId(u_id);
+    }
+
 }

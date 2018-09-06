@@ -2,6 +2,7 @@ package com.kx.controller;
 
 import com.kx.pojo.Orders;
 import com.kx.service.OrdersService;
+import com.kx.util.OrdersStr;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,18 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @RequestMapping("/add")
-    public synchronized String list(Orders order,HttpSession session){
+    @ResponseBody
+    public synchronized int list(Orders order,HttpSession session){
+        System.out.println("order<<<<<<<<<<<<<<<<<"+order.getOr_data_time());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String or_data_time = formatter.format(order.getOr_data_time());
+        String str = "";
+        int num = 1;
+        do{
+             str = OrdersStr.getStr(order);
+             num = ordersService.queryOrdersStr(str);
+        }while(num != 0);
+        order.setOr_id(str);//将订单号赋值
         System.out.println(or_data_time);
         int status = ordersService.getResidueStatus(String.valueOf(order.getOr_doc_id()),or_data_time);
         System.out.println(status+"~~~~~~~~~~~~~~~~~~~数据库返回状态码1有号");
@@ -37,8 +47,7 @@ public class OrdersController {
         if (status == 1) {
              result = ordersService.addOrder(order);
         }
-        session.setAttribute("result",result);
-        return "test";
+        return result;
     }
 
     @RequestMapping("/userQueryOrder")
@@ -63,6 +72,14 @@ public class OrdersController {
         model.addAttribute("docQueryOrder", docQueryOrder);
         return "show";
 
+    }
+
+    @RequestMapping("/getOrd")
+    public String getOrd(String u_id,Model model){
+        System.out.println("order.getOrd>>>>>>>>>>>>>>" + u_id);
+        List<Orders> ordersList = ordersService.getOrdersByUserId(u_id);
+        model.addAttribute("ordersList", ordersList);
+        return "AAAShowOrd";
     }
 
 }

@@ -34,4 +34,9 @@ public interface OrdersService {
     //查询是否还有剩余挂号
     int getResidueStatus(String or_doc_id,String or_data_time);
 
+    //订单号拼接工具类 张帅
+    int queryOrdersStr(String ordersStr);
+
+    //个人查看自己的订单历史
+    List<Orders> getOrdersByUserId(String u_id);
 }

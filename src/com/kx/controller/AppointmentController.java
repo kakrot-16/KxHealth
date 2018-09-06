@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam;
 import java.util.List;
 
 /**
@@ -52,6 +53,15 @@ public class AppointmentController {
     public @ResponseBody List<Appointment> getNo(String ap_user_id){
         List<Appointment> appointmentList = appointmentService.getNo(ap_user_id);
         return  appointmentList;
+    }
+
+    //根据用户id查询用户的所有订单
+    @RequestMapping("/getApp")
+    public String get(String u_id,Model model){
+        System.out.println("进入appointment>>>>>>>>>>>>" + u_id);
+        List<Appointment> appointmentList = appointmentService.getAppointmentByUserId(u_id);
+        model.addAttribute("appointmentList", appointmentList);
+        return "AAAShowApp";
     }
 
 

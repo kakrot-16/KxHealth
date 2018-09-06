@@ -54,5 +54,18 @@ public class Department1 {
 	public void setD2List(List<Department2> d2List) {
 		this.d2List = d2List;
 	}
-
+	public void ddd(){
+		String a=" <form action=\"<%=request.getContextPath()%>/order/add\" method=\"post\">\n" +
+				"        订单编号<input type=\"text\" name=\"or_id\"><br><br>\n" +
+				"        购买者编号<input type=\"text\" name=\"or_buyer_id\"><br><br>\n" +
+				"        购买人姓名<input type=\"text\" name=\"or_name\"><br><br>\n" +
+				"        医生id<input type=\"text\" name=\"or_doc_id\"><br><br>\n" +
+				"        性别<input type=\"text\" name=\"or_sex\"><br><br>\n" +
+				"        身份证<input type=\"text\" name=\"or_id_card\"><br><br>\n" +
+				"        挂号费<input type=\"text\" name=\"or_price\"><br><br>\n" +
+				"        看病时间<input type=\"date\" name=\"or_data_time\"><br><br>\n" +
+				"        支付账号<input type=\"text\" name=\"or_payId\"><br><br>\n" +
+				"        <input type=\"submit\" value=\"提交\">\n" +
+				"    </form>";
+	}
 }

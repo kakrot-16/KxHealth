@@ -127,7 +127,7 @@
                                 "            </div>\n" +
                                 "            <div class=\"action g-left\">\n" +
                                 "                <a  value="+data[p].d_id +
-                                "      d1="+data[p].d_department1+"             class=\"a1\"\n" +
+                                "      d1="+data[p].d_department1+"     price="+data[p].d_price+"        class=\"a1\"\n" +
                                 "                >挂号&nbsp;&nbsp;"+data[p].d_price+"元</a><br>\n" +
                                 "\n" +
                                 "                <a " +
@@ -149,13 +149,12 @@
         $(document).on("click",".a1",function () {
             var d_id = $(this).attr("value");
             var d_department1 = $(this).attr("d1");
-             swal(d_id+"     "+d_department1 )
-            var str = "<%=request.getContextPath()%>/doctorWork/getInfo?d_id="+d_id+"&d_department1="+d_department1;
-             window.location.href=str;
+            var d_price = $(this).attr("price")
+            var str = "<%=request.getContextPath()%>/doctorWork/getInfo?d_id="+d_id+"&d_department1="+d_department1+"&d_price="+d_price;
+            window.location.href=str;
         })
     })
 </script>
-<a id="aa" href="" click="go()"></a>
 <div id="ksorder_top">
     <div class="" style="width: 980px">
         <div  style="padding: 10px 0;font-size: 12px;width: auto">

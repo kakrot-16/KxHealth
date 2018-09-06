@@ -30,5 +30,8 @@ public interface AppointmentMapper {
 
     //查询用户预约了多少
     int getNoNum(String ap_user_id);
+
+    //根据用户id得到用户所有订单记录
+    List<Appointment> getAppointmentByUserId(String u_id);
 }
 

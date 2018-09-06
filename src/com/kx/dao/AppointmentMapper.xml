@@ -56,4 +56,10 @@
         where ap_doc_id in
         (select d_id from doctor where d_num > 0))
     </select>
+
+    <select id="getAppointmentByUserId" resultType="Appointment" parameterType="String">
+        select *
+        from appointment
+        where ap_user_id = #{u_id}
+    </select>
 </mapper>

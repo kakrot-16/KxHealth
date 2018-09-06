@@ -16,6 +16,8 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <script type="text/javascript" src="../static/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/css/sweetalert.css"/>
+    <script type="text/javascript" src="../static/js/sweetalert.min.js"></script>
 <body>
 <style>
      .g-container {
@@ -24,6 +26,14 @@
         background-color: rgba(22, 69, 131, .04);
         border-radius: 8px;
         border: none;
+    }
+    .yy{
+    color:green;
+    font-size:18px;
+    }
+    .nn{
+     color:red;
+    font-size:18px;
     }
 </style>
 <script>
@@ -98,7 +108,7 @@
     <div class="ksorder_time_title">
         <!-- <a href="#" class="ksorder_time_ckb" >查看科室月排班</a> -->
         <p class="ksorder_t_p">医生排班表</p>
-        <a href="/hp/appoint/1/1.htm" class="callback_ks">返回科室列表</a>
+        <a href="<%=request.getContextPath()%>/department1/getDocument1Name.do" class="callback_ks">返回科室列表</a>
     </div>
     <div class="ksorder_time_center">
         <div class="ksorder_cen_l">
@@ -143,62 +153,68 @@
                             </th>
                         </tr>
                         <tr>
-                            <td>
+                            <td >
                                 <c:if test="${timeList[0] eq list[0].or_data_time}">
-                                    <span>${d_num-list[0].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                    <span>${d_num-list[0].count>0?"<a class='yy' id='0' id="0"  >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[0] ne list[0].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='0' id="0"  >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[1] eq list[1].or_data_time}">
-                                    <span>${d_num-list[1].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
-                                </c:if>
+ 									<span>${d_num-list[1].count>0?"<a class='yy' id='1'   >有号</a>":"<a class='nn'>挂满</a>"}</span>                                </c:if>
                                 <c:if test="${timeList[1] ne list[1].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='1'   >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[2] eq list[2].or_data_time}">
-                                    <span>${d_num-list[2].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                    <span>${d_num-list[2].count>0?"<a class='yy' id='2'   >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[2] ne list[2].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='2'   >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[3] eq list[3].or_data_time}">
-                                    <span>${d_num-list[3].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                     <span>${d_num-list[3].count>0?"<a class='yy' id='3'   >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[3] ne list[3].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='3'   >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[4] eq list[4].or_data_time}">
-                                    <span>${d_num-list[4].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                     <span>${d_num-list[4].count>0?"<a class='yy' id='4'   >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[4] ne list[4].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='4'   >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[5] eq list[5].or_data_time}">
-                                    <span>${d_num-list[5].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                     <span>${d_num-list[5].count>0?"<a class='yy' id='5'   >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[5] ne list[5].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='5'   >有号</a></span>
                                 </c:if>
                             </td>
-                            <td>
+                            
+                            <td >
                                 <c:if test="${timeList[6] eq list[6].or_data_time}">
-                                    <span>${d_num-list[6].count>0?"<span style='color:green;font-size:18px'>有号</span>":"<span style='color:red;font-size:18px'>挂满</span>"}</span>
+                                     <span>${d_num-list[6].count>0?"<a class='yy' id='6'   >有号</a>":"<a class='nn'>挂满</a>"}</span>
                                 </c:if>
                                 <c:if test="${timeList[6] ne list[6].or_data_time}">
-                                    <span><span style='color:green;font-size:18px'>有号</span></span>
+                                    <span><a class='yy' id='6'   >有号</a></span>
                                 </c:if>
                             </td>
+                            
                         </tr>
                     </table>
                 </div>
@@ -206,11 +222,68 @@
             <div class="ksorder_cen_l_r">
             </div>
         </div>
-        <!--放号提醒-->
+	<script type = "text/javascript">
 
+
+    $(function () {
+        <%--<%=request.getParameter("d_price")%>--%>
+    	var or_price=5.5;//挂号费
+    	var or_doc_id=<%=request.getParameter("d_id")%>//医生id
+        var or_buyer_id = "${user.u_id}";
+        var or_name = "${user.u_name}";
+        var or_sex = "${user.u_gender}";
+        var or_id_card = "${user.u_IdCard}";
+        var or_payId = "null";
+        $(document).on("click",".yy",function () {
+            var day1 = 60 * 60 * 24 * 1000;
+            var i = $(this).attr("id");
+            var time = new Date(Date.now() + i * day1);
+            var or_data_time = time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()
+            var user = "${user.u_id}";
+         		 if(user == 0){
+                     window.location.replace("<%=request.getContextPath()%>/jsp/login.jsp");
+        		}else{
+                	 $.ajax({
+                		url:"<%=request.getContextPath()%>/order/add",
+                		data:{"or_buyer_id":or_buyer_id,"or_name":or_name,"or_doc_id":or_doc_id,
+                			 "or_sex":or_sex,"or_id_card":or_id_card,"or_price":or_price,"or_data_time":or_data_time,"or_payId":or_payId},
+                		type:"post",
+                		dataType:"text",
+                		success:function(data){
+                			if(data == 1){
+                				swal({
+                                    title: "挂号成功",
+                                    text: "要跳转回首页吗？",
+                                    type: "success",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    confirmButtonText: "是的，我要回首页",
+                                    confirmButtonColor: "#1fd783"
+                                }, function () {
+                                    window.location.replace("../index.jsp");
+                                });
+                			}else{
+                				swal({
+                                    title: "系统繁忙，请稍后重试。",
+                                    text: "要跳转回首页吗？",
+                                    type: "error",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    confirmButtonText: "是的，我要回首页",
+                                    confirmButtonColor: "#1fd783"
+                                }, function () {
+                                    window.location.replace("../index.jsp");
+                                });
+                			}
+                		}
+                	})
+        		}
+        })
+    });
+    </script>
         <div class="ksorder_cen_r">
             <div class="ksorder_cen_r_top">
-                <h4>预约规则</h4>
+                <h4>挂号规则</h4>
                 <ul>
                     <li><span>更新时间：</span>每日8:30更新</li>
                     <li><span>预约周期：</span>7

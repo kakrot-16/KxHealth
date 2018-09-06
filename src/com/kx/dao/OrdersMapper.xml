@@ -50,4 +50,15 @@
         where or_buyer_id = #{u_id}
     </select>
 
+    <select id="queryOrdersStr" resultType="int">
+        select count(1)
+        from orders
+        where or_id = #{or_id}
+    </select>
+
+    <select id="getOrdersByUserId" resultType="Orders" parameterType="String">
+        select *
+        from orders
+        where or_buyer_id = #{u_id}
+    </select>
 </mapper>

@@ -37,5 +37,7 @@
         科室ID:<input type="text" name="d1_id"><br><br>
         <input type="submit" value="查询">
     </form>
+<script>
+</script>
 </body>
 </html>
